@@ -1,11 +1,21 @@
-var flickerAmount : float; // チラツキ量
+// ライトをチラチラさせるスクリプト。
+// 蛍光灯っぽさを演出する。
 
-private var intensity : float; // 元の輝度
+// ※ このスクリプトは書籍では解説していません。
+// 演出を強化するために追加したものです。
 
-function Start () {
+var flickerAmount : float;		// チラツキの量
+
+private var intensity : float;	// ライトの元の輝度。
+
+// 初期化処理。
+function Start() {
+	// ライトの元の輝度を保存する。
 	intensity = light.intensity;
 }
 
-function Update () {
+// 更新処理。
+function Update() {
+	// チラツキの量に基づいて、ランダムに輝度を変化させる。
 	light.intensity = intensity * (1.0 - Random.Range(0.0, flickerAmount));
 }

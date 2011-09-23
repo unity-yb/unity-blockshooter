@@ -1,25 +1,26 @@
-// ゲーム開始から終了までの時間経過を管理するスクリプト。
+// ゲーム開始から終了までの時間経過を計るスクリプト。
 
-var gameLength : float; // ゲーム開始から終了までの長さ
+var gameLength : float; // ゲーム開始から終了までの長さ。
 
-private var elapsed : float; // 経過時間
-
-function Start () {
-	elapsed = 0.0;
-}
+private var elapsed : float; // 経過時間。
 
 // ゲーム開始メッセージの処理。
-function StartGame () {
+function StartGame() {
+	// スクリプトの処理を開始する。
 	enabled = true;
 }
 
-function Update () {
+// 更新処理。
+function Update() {
+	// 時間を進める。
 	elapsed += Time.deltaTime;
+	// 時間が終了時間に達したら……
 	if (elapsed >= gameLength) {
 		// このゲームオブジェクトとカメラに
-		// タイムアップメッセージを送信して終了する。
+		// タイムアップメッセージをブロードキャストする。
 		BroadcastMessage("TimeUp");
 		GameObject.FindWithTag("MainCamera").BroadcastMessage("TimeUp");
-		Destroy(this);
+		// スクリプトの処理を停止する。
+		enabled = false;
 	}
 }

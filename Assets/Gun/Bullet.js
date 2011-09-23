@@ -1,11 +1,12 @@
-// 弾丸を制御するスクリプト。
+// 弾丸の衝突判定を処理するスクリプト。
 
-function OnCollisionEnter (collision : Collision) {
+// 衝突が発生したときに実行される関数。
+function OnCollisionEnter(collision : Collision) {
+	// 衝突相手が箱であるかどうかを調べる。
    	if (collision.gameObject.tag == "Box") {
-   		// 上方向に衝撃を与える。
-   		collision.rigidbody.AddForce(Vector3.up * 15.0, ForceMode.Impulse);
-   		// ダメージメッセージを送信する。
+   		// 衝突相手にダメージメッセージを送信する。
    		collision.gameObject.SendMessage("ApplyDamage");
    	}
+   	// 相手が何であろうが弾丸は消滅する。
     Destroy(gameObject);
 }
